@@ -1,0 +1,104 @@
+body{
+	font-family: 'Roboto Condensed', sans-serif;
+	margin: 0;
+	text-align: justify;
+	font-size: 13px;
+    background: linear-gradient(-30deg, #55ccff, #aaeeff);
+    height: 100%;
+    min-height: 1000px;
+    padding-bottom: 100px;
+}
+
+#pdf {
+    display: none;
+}
+
+.bigHeader {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    font-size: 48px;
+    color: rgb(51, 81, 152);
+}
+
+.inputsContainer {
+    padding: 15px 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.inputsContainerFilled {
+    margin: 15px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.btnStandard {
+    font-weight: 700;
+    font-size: 9px;
+    color: white;
+    background-color: rgb(51, 81, 152);
+    border: none;
+    border-radius: 2px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+}
+
+.btnWarn {
+    background-color: rgb(153, 19, 53);
+}
+
+.centerDiv {
+    width: 100%;
+    text-align: center;
+}
+
+.sectionHeader {
+    font-weight: 700;
+    font-size: 16px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+}
+
+.sectionHeader span {
+    margin-right: 30px;
+}
+
+.inputSection {
+    padding: 20px;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 2px;
+    flex-grow: 1;
+}
+
+.inputSectionClear {
+    padding-bottom: 20px;
+    margin: 20px;
+}
+
+.sectionHeaderClear {
+    font-weight: 700;
+    font-size: 16px;
+    padding: 20px;
+    text-transform: uppercase;
+    flex-basis: 100%;
+}
+
+.inputRow {
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.inputText {
+    margin-right: 10px;
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    resize: vertical;
+}
