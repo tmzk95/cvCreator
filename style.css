@@ -46,8 +46,17 @@ body{
     text-transform: uppercase;
 }
 
+.btnInverse {
+    background: #fff;
+    color: rgb(51, 81, 152);
+}
+
 .btnWarn {
     background-color: rgb(153, 19, 53);
+}
+
+.btnBig {
+    font-size: 12px;
 }
 
 .centerDiv {
@@ -103,4 +112,25 @@ body{
     border: 1px solid #ddd;
     border-radius: 2px;
     resize: vertical;
+}
+
+.addSection {
+    padding: 20px 20px;
+    background-color: #fff;
+    background-color: rgb(51, 81, 152);
+    border-radius: 2px;
+    width: 340px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.addSection .inputText {
+    background: none;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.addSection input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
 }

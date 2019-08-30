@@ -1,3 +1,51 @@
+var sectionValues = [
+	{ 
+		inputSectionId : "experianceInputs",
+		outputSectionId : "experiance",
+		outputSectionHeader : "Doświadczenie zawodowe",
+		headerInputLabel : "Pracodawca",
+		secondaryInputLabel : "Daty",
+		infoInputLabel : "Kwalifikacje",
+		buttonId: "addExperiance"
+	},
+	{ 
+		inputSectionId : "educationInputs",
+		outputSectionId : "education",
+		outputSectionHeader : "Wykształcenie",
+		headerInputLabel : "Uczelnia",
+		secondaryInputLabel : "Daty",
+		infoInputLabel : "Informacje",
+		buttonId: "addEducation"
+	},
+	{ 
+		inputSectionId : "languageInputs",
+		outputSectionId : "languages",
+		outputSectionHeader : "Języki",
+		headerInputLabel : "Język",
+		secondaryInputLabel : undefined,
+		infoInputLabel : "Dodatkowe informacje",
+		buttonId: "addLanguages"
+	},
+	{ 
+		inputSectionId : "skillInputs",
+		outputSectionId : "skills",
+		outputSectionHeader : "Umiejętności",
+		headerInputLabel : "Umiejętność",
+		secondaryInputLabel : undefined,
+		infoInputLabel : "Dodatkowe informacje",
+		buttonId: "addSkills"
+	},
+	{ 
+		inputSectionId : "hobbyInputs",
+		outputSectionId : "hobbys",
+		outputSectionHeader : "Zainteresowania",
+		headerInputLabel : "Hobby",
+		secondaryInputLabel : undefined,
+		infoInputLabel : "Dodatkowe informacje",
+		buttonId: "addHobbys"
+	}
+];
+
 function printPdf() {
 	buildPdfContent();
 	var divContents = $("#pdf").html();
@@ -30,11 +78,9 @@ function printPdf() {
 
 function buildPdfContent() {
 	buildBasicInfo();
-	buildRows("#experianceInputs", "experiance", "Doświadczenie zawodowe");
-	buildRows("#educationInputs", "education", "Wykształcenie");
-	buildRows("#languageInputs", "languages", "Języki");
-	buildRows("#skillInputs", "skills", "Umiejętności");
-	buildRows("#hobbyInputs", "hobbys", "Zainteresowania");
+	for(const row of sectionValues) {
+		buildRows(row);
+	}
 }
 
 function buildBasicInfo() {
@@ -44,93 +90,117 @@ function buildBasicInfo() {
 	document.getElementById("mail").innerHTML = document.getElementById("mailInput").value;
 	document.getElementById("address").innerHTML = document.getElementById("addressInput").value;
 	document.getElementById("birthday").innerHTML = document.getElementById("birthdayInput").value;
-	document.getElementById("photo").innerHTML =
-		"<img src='" +
-		document.getElementById("photoInput").value +
-		"' />";
+	document.getElementById("photo").innerHTML = `<img src="${document.getElementById("photoInput").value}" />`;
 }
 
-function buildRows(inputSectionId, outputSectionId, outputSectionHeader) {
+function buildRows({inputSectionId, outputSectionId, outputSectionHeader}) {
 	document.getElementById(outputSectionId).innerHTML =
-		'<div class="main_header">' +
-			outputSectionHeader +
-		'</div>';
+		`<div class="main_header">${outputSectionHeader}</div>`;
 
-	var wrapperChildren = $(inputSectionId).children();
+	var wrapperChildren = [...$(`#${inputSectionId}`).children()];
 
-	for (var i = 0; i < wrapperChildren.length; i++) {
-		let children = wrapperChildren[i].children;
-
-		for(var j = 0; j < children.length; j++) {
-			if(children[j].name === "headerInput") {
-				var header = children[j].value;
-			}
-			if(children[j].name === "secondaryInput") {
-				var secondary = children[j].value;
-			}
-			if(children[j].name === "infoInput") {
-				var info = children[j].value;
-			}
-		}
-		addRow(header, secondary, info, outputSectionId);
-	}
+	wrapperChildren.map(wrapperChild => {
+		var children = [...wrapperChild.children];
+		var row = {header : '', secondary : '', info : ''};
+		children.map(v => {
+			row.header = v.name === "headerInput" ? v.value : row.header;
+			row.secondary = v.name === "secondaryInput" ? v.value : row.secondary;
+			row.info = v.name === "infoInput" ? v.value : row.info;
+		});
+		addRow(row, outputSectionId);
+	});
 }
 
-function addRow(header, secondary, info, outputSectionId) {
+function addRow({header, secondary, info}, outputSectionId) {
 	const div = document.createElement('div');
   
 	div.className = 'desc_dot';
 	div.innerHTML = `
 		<div class="dot_header big_header">
-			<div class="header_text">` +
-				(header === undefined ? '' : header) + `
+			<div class="header_text">
+				${header}
 			</div>
-			<div class="header_data">` +
-				(secondary === undefined ? '' : secondary) + `
+			<div class="header_data">
+				${secondary}
 			</div>
 		</div>
-		<div class="dot_info">` +
-			(info === undefined ? '' : info) + `
+		<div class="dot_info">
+			${info}
 		</div>
 	`;
   
 	document.getElementById(outputSectionId).appendChild(div);
 }
 
-function addInput(headerLabel, secondaryLabel, infoLabel, parentId) {
+function addInput({headerInputLabel, secondaryInputLabel, infoInputLabel, inputSectionId}) {
 	const div = document.createElement('div');
   
 	div.className = 'inputRow';
 	div.innerHTML =
-	'<textarea rows="3" placeholder="' + headerLabel + '" class="inputText" type="text" name="headerInput" value="" ></textarea>' +
-	(secondaryLabel === null ? '' : '<textarea rows="3" placeholder="' + secondaryLabel + '" class="inputText" name="secondaryInput" value=""></textarea>') +
-	(infoLabel === null ? '' : '<textarea rows="3" placeholder="' + infoLabel + '" class="inputText" name="infoInput" value=""></textarea>') +
-	'<input type="button" class="btnStandard btnWarn" value="Usuń" onclick="removeRow(this, \'' + parentId + '\')" />';
+	'<textarea rows="3" placeholder="' + headerInputLabel + '" class="inputText" type="text" name="headerInput" value="" ></textarea>' +
+	(secondaryInputLabel === undefined ? '' : '<textarea rows="3" placeholder="' + secondaryInputLabel + '" class="inputText" name="secondaryInput" value=""></textarea>') +
+	(infoInputLabel === undefined ? '' : '<textarea rows="3" placeholder="' + infoInputLabel + '" class="inputText" name="infoInput" value=""></textarea>') +
+	'<input type="button" class="btnStandard btnWarn" value="Usuń" onclick="removeRow(this, \'' + inputSectionId + '\')" />';
   
-	document.getElementById(parentId).appendChild(div);
+	document.getElementById(inputSectionId).appendChild(div);
 }
 
 function removeRow(input, parentId) {
   document.getElementById(parentId).removeChild(input.parentNode);
 }
 
+function addSection() {
+	var sectionNameHeader = document.getElementById("sectionName").value;
+	var sectionName = sectionNameHeader;
+	sectionName = sectionName.replace(/\s/g,'');
+
+	var section = {
+		inputSectionId : `${sectionName}Inputs`,
+		outputSectionId : sectionName,
+		outputSectionHeader : sectionNameHeader,
+		headerInputLabel : "Info",
+		secondaryInputLabel : "Info",
+		infoInputLabel : "Info",
+		buttonId: `add${sectionName}`
+	};
+	sectionValues = [...sectionValues, section];
+
+
+	const inputDiv = document.createElement('div');
+	inputDiv.className = 'inputSection';
+	inputDiv.innerHTML = `
+		<div class="sectionHeader">
+			<span>${sectionNameHeader}</span>
+			<input class="btnStandard" type="button" value="Dodaj" id="add${sectionName}" />
+		</div>
+		<div id="${sectionName}Inputs"></div>
+	`;
+	document.getElementById("inputsContainer").appendChild(inputDiv);
+
+	
+	const outputDiv = document.createElement('div');
+	outputDiv.className = 'desc_section';
+	outputDiv.id = sectionName;
+	document.getElementById("desc_info").appendChild(outputDiv);
+
+
+	$(`#add${sectionName}`).on("click", function() {
+		addInput(section);
+	});
+}
+
 $(function(){
 	$("#btnPrint").on("click", function() {
 		printPdf();
 	});
-	$("#addExperiance").on("click", function() {
-		addInput("Pracodawca", "Daty", "Kwalifikacje", "experianceInputs");
+
+	$("#addSection").on("click", function() {
+		addSection();
 	});
-	$("#addEducation").on("click", function() {
-		addInput("Uczelnia", "Daty", "Informacje", "educationInputs");
-	});
-	$("#addLanguages").on("click", function() {
-		addInput("Język", null, "Dodatkowe informacje", "languageInputs");
-	});
-	$("#addSkills").on("click", function() {
-		addInput("Umiejętność", null, "Dodatkowe informacje", "skillInputs");
-	});
-	$("#addHobbys").on("click", function() {
-		addInput("Hobby", null, "Dodatkowe informacje", "hobbyInputs");
-	});
+	
+	for(const row of sectionValues) {
+		$(`#${row.buttonId}`).on("click", function() {
+			addInput(row);
+		});
+	}
 });
