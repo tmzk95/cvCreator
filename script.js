@@ -103,7 +103,7 @@ function addInput(headerLabel, secondaryLabel, infoLabel, parentId) {
 	div.className = 'inputRow';
 	div.innerHTML =
 	'<textarea rows="3" placeholder="' + headerLabel + '" class="inputText" type="text" name="headerInput" value="" ></textarea>' +
-	'<textarea rows="3" placeholder="' + secondaryLabel + '" class="inputText" type="text" name="secondaryInput" value="" ></textarea>' +
+	(secondaryLabel === null ? '' : '<textarea rows="3" placeholder="' + secondaryLabel + '" class="inputText" name="secondaryInput" value=""></textarea>') +
 	(infoLabel === null ? '' : '<textarea rows="3" placeholder="' + infoLabel + '" class="inputText" name="infoInput" value=""></textarea>') +
 	'<input type="button" class="btnStandard btnWarn" value="Usuń" onclick="removeRow(this, \'' + parentId + '\')" />';
   
@@ -125,12 +125,12 @@ $(function(){
 		addInput("Uczelnia", "Daty", "Informacje", "educationInputs");
 	});
 	$("#addLanguages").on("click", function() {
-		addInput("Język", "Dodatkowe informacje", null, "languageInputs");
+		addInput("Język", null, "Dodatkowe informacje", "languageInputs");
 	});
 	$("#addSkills").on("click", function() {
-		addInput("Umiejętność", "Dodatkowe informacje", null, "skillInputs");
+		addInput("Umiejętność", null, "Dodatkowe informacje", "skillInputs");
 	});
 	$("#addHobbys").on("click", function() {
-		addInput("Hobby", "Dodatkowe informacje", null, "hobbyInputs");
+		addInput("Hobby", null, "Dodatkowe informacje", "hobbyInputs");
 	});
 });
