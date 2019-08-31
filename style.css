@@ -3,7 +3,7 @@ body{
 	margin: 0;
 	text-align: justify;
 	font-size: 13px;
-    background: linear-gradient(-30deg, #55ccff, #aaeeff);
+    background: linear-gradient(-30deg, #55ccff, #c8f4ff);
     height: 100%;
     min-height: 1000px;
     padding-bottom: 100px;
@@ -137,7 +137,7 @@ body{
 
 .addSection {
     padding: 30px;
-    background-color: rgba(51, 81, 152, 0.96);
+    background-color: rgba(51, 81, 152, 0.98);
     border-radius: 3px;
     width: 340px;
     display: flex;
@@ -157,7 +157,7 @@ body{
 .saveSection {
     padding: 30px;
     padding-bottom: 31px;
-    background-color: rgba(44, 139, 228, 0.96);
+    background-color: rgba(44, 139, 228, 0.98);
     border-radius: 3px;
     width: 200px;
 }
