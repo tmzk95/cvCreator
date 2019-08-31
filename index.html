@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    <div id="toast"></div>
 
     <div class="centerDiv">
         <div class="bigHeader">DTCV</div>
@@ -24,41 +25,54 @@
                 <span>Podstawowe Dane</span>
         </div>
         <div class="inputSectionClear">
-            <input placeholder="Imię / imiona" class="inputText" type="text" value="" id="firstNameInput"></textarea>
+            <div class="inputClear">
+                <div class="inputClearHeader">Imię</div>
+                <input placeholder="Imię / imiona" class="inputText" type="text" value="" id="firstNameInput"></textarea>
+            </div>
+            <div class="inputClear">
+                    <div class="inputClearHeader">Nazwisko</div>
+                <input placeholder="Nazwisko" class="inputText" type="text" value="" id="lastNameInput"></input>
+            </div>
+            <div class="inputClear">
+                    <div class="inputClearHeader">Numer Telefonu</div>
+                <input placeholder="Telefon" class="inputText" type="text" value="" id="phoneInput"></input>
+            </div>
+            <div class="inputClear">
+                    <div class="inputClearHeader">Adres Email</div>
+                <input placeholder="Email" class="inputText" type="text" value="" id="mailInput"></input>
+            </div>
         </div>
 
         <div class="inputSectionClear">
-            <input placeholder="Nazwisko" class="inputText" type="text" value="" id="lastNameInput"></input>
-        </div>
-
-        <div class="inputSectionClear">
-            <input placeholder="Telefon" class="inputText" type="text" value="" id="phoneInput"></input>
-        </div>
-
-        <div class="inputSectionClear">
-            <input placeholder="Email" class="inputText" type="text" value="" id="mailInput"></input>
-        </div>
-
-        <div class="inputSectionClear">
-            <input placeholder="Adres" class="inputText" type="text" value="" id="addressInput"></input>
-        </div>
-
-        <div class="inputSectionClear">
-            <input placeholder="Data urodzenia" class="inputText" type="text" value="" id="birthdayInput"></input>
-        </div>
-
-        <div class="inputSectionClear">
-            <input placeholder="Adres URL zdjęcia (8:10)" class="inputText" type="url" value="" id="photoInput"></input>
+            <div class="inputClear">
+                <div class="inputClearHeader">Adres Zamieszkania</div>
+                <input placeholder="Adres" class="inputText" type="text" value="" id="addressInput"></input>
+            </div>
+            <div class="inputClear">
+                <div class="inputClearHeader">Data Urodzenia</div>
+                <input placeholder="Data urodzenia" class="inputText" type="text" value="" id="birthdayInput"></input>
+            </div>
+            <div class="inputClear">
+                <div class="inputClearHeader">Zdjęcie</div>
+                <input placeholder="Adres URL zdjęcia (8:10)" class="inputText" type="url" value="" id="photoInput"></input>
+            </div>
         </div>
 
     </div>
 
 
 
-    <div style="margin-top: 40px;" class="centerDiv">
-        <div class="addSection">
-            <input placeholder="Nazwa sekcji" class="inputText" type="text" value="" id="sectionName" />
-            <input class="btnStandard btnInverse" type="button" value="Dodaj własną sekcję" id="addSection" />
+    <div style="margin-top: 25px; display: flex; flex-wrap: wrap;" class="centerDiv">
+        <div class="lines">
+            <div class="addSection">
+                <input placeholder="Nazwa sekcji" class="inputText" type="text" value="" id="sectionName" />
+                <input class="btnStandard btnInverse" type="button" value="Dodaj własną sekcję" id="addSection" />
+            </div>
+        </div>
+        <div style="margin-left: 40px; " class="lines">
+            <div class="saveSection">
+                <input class="btnStandard btnSuccessInverse" type="button" value="Zobacz CV!" id="btnPrint" />
+            </div>
         </div>
     </div>
 
@@ -108,12 +122,6 @@
 
 
     </div>
-
-    
-    <div style="margin-top: 40px;" class="centerDiv">
-        <input class="btnStandard" type="button" value="Stwórz CV" id="btnPrint" />
-    </div>
-
 
 
 

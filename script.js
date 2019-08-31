@@ -46,8 +46,19 @@ var sectionValues = [
 	}
 ];
 
+var errors = new Map([
+	["basic_info", {
+		message : "Najpierw uzupełnij podstawowe dane",
+		severity: "warnStyle",
+		validity : true
+	}]
+]);
+
 function printPdf() {
 	buildPdfContent();
+	if(checkValidity() === false) {
+		return;
+	}
 	var divContents = $("#pdf").html();
 	var printWindow = window.open('', '', 'height=800,width=1000');
     var is_chrome = Boolean(printWindow.chrome);
@@ -84,6 +95,18 @@ function buildPdfContent() {
 }
 
 function buildBasicInfo() {
+	if(document.getElementById("firstNameInput").value === '' ||
+			document.getElementById("lastNameInput").value === '' ||
+			document.getElementById("phoneInput").value === '' ||
+			document.getElementById("mailInput").value === '' ||
+			document.getElementById("addressInput").value === '' ||
+			document.getElementById("birthdayInput").value === '' ||
+			document.getElementById("photoInput").value === '') {
+		addError("basic_info");
+	}
+	else {
+		addSuccess("basic_info");
+	}
 	document.getElementById("firstName").innerHTML = document.getElementById("firstNameInput").value;
 	document.getElementById("lastName").innerHTML = document.getElementById("lastNameInput").value;
 	document.getElementById("phone").innerHTML = document.getElementById("phoneInput").value;
@@ -151,6 +174,15 @@ function removeRow(input, parentId) {
 
 function addSection() {
 	var sectionNameHeader = document.getElementById("sectionName").value;
+	const isDuplicate = sectionValues.filter(v => v.outputSectionHeader.toLowerCase() === sectionNameHeader.toLowerCase());
+	if(sectionNameHeader === "") {
+		showToast("warnStyle", "Najpierw podaj nazwę nowej sekcji.")
+		return;
+	}
+	if(isDuplicate.length > 0) {
+		showToast("errorStyle", "Podana sekcja już istnieje.")
+		return;
+	}
 	var sectionName = sectionNameHeader;
 	sectionName = sectionName.replace(/\s/g,'');
 
@@ -186,6 +218,37 @@ function addSection() {
 
 	$(`#add${sectionName}`).on("click", function() {
 		addInput(section);
+	});
+
+	showToast("successStyle", `Sekcja "${sectionNameHeader}" dodana!`)
+}
+
+function checkValidity() {
+	for(const error of errors.values()) {
+		if(error.validity === false) {
+			showToast(error.severity, error.message);
+			return false;
+		}
+	}
+	return true;
+}
+
+function addError(section) {
+	errors.get(section).validity = false;
+}
+
+function addSuccess(section) {
+	errors.get(section).validity = true;
+}
+
+function showToast(style, description) {
+	var toast = $("#toast");
+	toast.text(description);
+	toast.removeClass("warnStyle errorStyle successStyle");
+	toast.addClass(style);
+	toast.finish();
+	toast.fadeIn(100, function() {
+		$("#toast").delay(2500).fadeOut(500);
 	});
 }
 

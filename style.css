@@ -14,25 +14,27 @@ body{
 }
 
 .bigHeader {
-    margin-top: 60px;
+    padding-top: 60px;
     margin-bottom: 50px;
     font-size: 48px;
     color: rgb(51, 81, 152);
 }
 
 .inputsContainer {
+    margin-top: 20px;
     padding: 15px 30px;
     display: flex;
     flex-wrap: wrap;
 }
 
 .inputsContainerFilled {
-    margin: 15px 40px;
+    margin: auto;
     display: flex;
+    max-width: 485px;
+    padding: 10px;
     flex-wrap: wrap;
-    justify-content: center;
     background-color: #fff;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 .btnStandard {
@@ -53,6 +55,16 @@ body{
 
 .btnWarn {
     background-color: rgb(153, 19, 53);
+}
+
+.btnSuccess {
+    color: white;
+    background-color: rgb(44, 139, 228);
+}
+
+.btnSuccessInverse {
+    background-color: white;
+    color: rgb(44, 139, 228);
 }
 
 .btnBig {
@@ -80,16 +92,25 @@ body{
 }
 
 .inputSection {
-    padding: 20px;
+    padding: 20px 30px;
     margin: 10px;
     background-color: #fff;
-    border-radius: 2px;
+    border-radius: 3px;
     flex-grow: 1;
 }
 
 .inputSectionClear {
     padding-bottom: 20px;
     margin: 20px;
+}
+
+.inputClear {
+    margin-bottom: 15px;
+}
+
+.inputClearHeader {
+    font-weight: 700;
+    margin-bottom: 3px;
 }
 
 .sectionHeaderClear {
@@ -115,22 +136,62 @@ body{
 }
 
 .addSection {
-    padding: 20px 20px;
-    background-color: #fff;
-    background-color: rgb(51, 81, 152);
-    border-radius: 2px;
+    padding: 30px;
+    background-color: rgba(51, 81, 152, 0.96);
+    border-radius: 3px;
     width: 340px;
-    margin: 0 auto;
-    margin-bottom: 10px;
     display: flex;
 }
 
 .addSection .inputText {
     background: none;
     color: #fff;
+    background-color: rgb(51, 81, 152);
     border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .addSection input::placeholder {
     color: rgba(255, 255, 255, 0.4);
+}
+
+.saveSection {
+    padding: 30px;
+    padding-bottom: 31px;
+    background-color: rgba(44, 139, 228, 0.96);
+    border-radius: 3px;
+    width: 200px;
+}
+
+.lines {
+    background-image: url(img/lines.jpg);
+    background-size: 240px;
+    margin-left: 40px;
+    margin-top: 20px;
+    border-radius: 3px;
+}
+
+#toast {
+    position: fixed;
+    width: 100%;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: none;
+    letter-spacing: 1px;
+}
+
+.errorStyle {
+    color: rgb(80, 9, 27);
+    background-color: rgb(196, 24, 67);
+}
+
+.warnStyle {
+    color: rgb(61, 56, 31);
+    background-color: rgb(221, 183, 11);
+}
+
+.successStyle {
+    color: rgb(13, 94, 33);
+    background-color: rgb(60, 199, 94);
 }
