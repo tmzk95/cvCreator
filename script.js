@@ -117,10 +117,14 @@ function buildBasicInfo() {
 }
 
 function buildRows({inputSectionId, outputSectionId, outputSectionHeader}) {
+	const inputChildren = $(`#${inputSectionId}`).children();
+	if(inputChildren.length == 0) {
+		return;
+	}
 	document.getElementById(outputSectionId).innerHTML =
 		`<div class="main_header">${outputSectionHeader}</div>`;
 
-	var wrapperChildren = [...$(`#${inputSectionId}`).children()];
+	var wrapperChildren = [...inputChildren];
 
 	wrapperChildren.map(wrapperChild => {
 		var children = [...wrapperChild.children];
